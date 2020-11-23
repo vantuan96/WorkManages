@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "351306566492",
+    "firebase_url": "https://workmanagement-2e176.firebaseio.com",
+    "project_id": "workmanagement-2e176",
+    "storage_bucket": "workmanagement-2e176.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351306566492:android:be5da2b63eaabe5171cf99",
+        "android_client_info": {
+          "package_name": "com.maximusnguyen.flutter_workmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351306566492-skio006deourp514nv5r5gbrgldc3fut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maximusnguyen.flutter_workmanagement",
+            "certificate_hash": "d2b9fe64c105ed085d2f7b145466f5bceeb8d5c3"
+          }
+        },
+        {
+          "client_id": "351306566492-7blc7q2an89p1sidt63ch6ovsfr91t53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maximusnguyen.flutter_workmanagement",
+            "certificate_hash": "c30f68d0138eb1505d0b08b7506f2c38ed17feb4"
+          }
+        },
+        {
+          "client_id": "351306566492-57c69bga9ke342j2sa9j9nnh4ac70h3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhoRDTh_uxpA5352MGoU8E58Tt7QRj_ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "351306566492-57c69bga9ke342j2sa9j9nnh4ac70h3q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "351306566492-n85cmshs6hfkuo3odbnn4lqjd54cqut5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maximusnguyen.flutterWorkmanagement"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,174 @@
+@model Kztek_Model.Models.PM.PM_Project
+
+@{
+ViewBag.Title = "Thông tin dự án";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Update", "PM_Project", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmProject" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.Hidden("hidProjectId", Model.Id)
+
+    <div class="col-xs-10">
+        <div class="tabbable">
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active">
+					<a data-toggle="tab" href="#home">
+						<i class="green ace-icon fa fa-home bigger-120"></i>
+						Thông tin
+					</a>
+				</li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Tiêu đề <span style="color:red">*</span></label>
+                            <div class="col-sm-9 col-xs-12">
+                                @Html.TextBoxFor(n => n.Title, new { @class = "form-control",
+                                @placeholder = "Tên dự án" }) @Html.ValidationMessageFor(n =>
+                                n.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Mô tả </label>
+                            <div class="col-sm-9 col-xs-12">
+                                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                                @placeholder = "Tên dự án" }) @Html.ValidationMessageFor(n =>
+                                n.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                       <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Ghi chú </label>
+                            <div class="col-sm-9 col-xs-12">
+                                @Html.TextAreaFor(n => n.Note, new { @class = "form-control",
+                                @placeholder = "Ghi chú" }) @Html.ValidationMessageFor(n =>
+                                n.Note, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Ngày tạo</label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBox("dtpDateCreated", Model.DateCreated.ToString("dd/MM/yyyy HH:mm"), new { @class = "form-control",
+                                @placeholder = "", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(n => n.DateCreated, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                       <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Bắt đầu</label>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="input-group">
+                                    @Html.TextBox("dtpDateStart", Model.DateStart.ToString("dd/MM/yyyy HH:mm"), new { @class = "form-control dtp_input",
+                                @placeholder = "" })
+                                    <span class="input-group-addon">
+																	<i class="ace-icon fa fa-calendar"></i>
+																</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Kết thúc</label>
+                            <div class="col-sm-6 col-xs-12">
+                               <div class="input-group">
+                                    @Html.TextBox("dtpDateEnd", Model.DateEnd.ToString("dd/MM/yyyy HH:mm"), new { @class = "form-control dtp_input",
+                                @placeholder = "" })
+                                   <span class="input-group-addon">
+																	<i class="ace-icon fa fa-calendar"></i>
+																</span>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label-right no-padding-right">
+                                Trạng thái</label>
+                            <div class="col-sm-6 col-xs-12">
+                                @await Component.InvokeAsync("ChosenSelect", ViewBag.ProjectStatus)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="clear:both"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div class="col-xs-10">
+       <div style="overflow-y: auto; max-height: 500px;">
+           <table class="table table-bordered table-hover" id="tblComponent">
+           <thead>
+               <tr>
+                   <th>Mã</th>
+                   <th>Tiêu đề</th>
+                   <th>Mô tả</th>
+                   <th>Ghi chú</th>
+                   <th>Thời gian</th>
+                   <th>Người thực hiện</th>
+                   <th>Xử lý</th>
+               </tr>
+           </thead>
+           <tbody>
+               
+           </tbody>
+       </table>
+       </div>
+    </div>
+    
+
+     @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "PM_Project",
+          ActionName = "BackList",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+<div id="boxComponentModal"></div>
+<div id="boxWorkModal"></div>
+<div id="boxMessageModal"></div>
+
+@section scripts{
+    <script src="~/modules/PM/PM_ProjectController.js"></script>
+    <script>
+        $(document).ready(function () {
+            PM_ProjectController.init();
+        });
+    </script>
+}

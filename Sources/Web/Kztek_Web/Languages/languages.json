@@ -1,0 +1,691 @@
+﻿{
+  "HEADER": {
+
+  },
+
+  "SIBEBAR": {
+
+  },
+
+  "BREADCRUMB": {
+
+  },
+
+  "FOOTER": {
+
+  },
+
+  "BODY": {
+
+    "TITLE": {
+
+      "tblBlackList": {
+        "en": "BLACKLIST's LIST",
+        "vi": "Danh sách biển số đen"
+      },
+
+      "tblPC": {
+        "en": "Computer List",
+        "vi": "Máy tính"
+      },
+
+      "tblVehicleGroup": {
+        "en": "Vehicle Group List",
+        "vi": "Danh sách nhóm phương tiện"
+      },
+
+      "tblCardGroup": {
+        "en": "Card Group List",
+        "vi": "Danh sách nhóm thẻ"
+      },
+
+      "tblCard": {
+        "en": "Card List",
+        "vi": "Danh sách thẻ"
+      },
+
+      "AccessUpload": {
+        "en": "Communicating with device",
+        "vi": "Giao tiếp với thiết bị"
+      },
+
+      "OrderActiveCard": {
+        "en": "Invoice list",
+        "vi": "Danh sách hóa đơn"
+      }
+    },
+
+    "SEARCH": {
+
+      "KEYWORD": {
+        "en": "Key word",
+        "vi": "Từ khóa"
+      },
+
+      "FROMDATE": {
+        "en": "From date",
+        "vi": "Từ ngày"
+      },
+
+      "TODATE": {
+        "en": "To date",
+        "vi": "Đến ngày"
+      },
+
+      "LANE": {
+        "en": "Lane",
+        "vi": "Làn"
+      },
+
+      "USER": {
+        "en": "User",
+        "vi": "Người dùng"
+      },
+
+      "NoFilter": {
+        "en": "No Filter",
+        "vi": "Không lọc theo ngày"
+      },
+
+      "FilterByCreated": {
+        "en": "Filter by Date Created",
+        "vi": "Lọc theo ngày tạo"
+      },
+
+      "FilterByExpire": {
+        "en": "Filter by Expire Date",
+        "vi": "Lọc theo ngày hết hạn"
+      },
+
+      "FindAutoCapture": {
+        "en": "Find auto capture",
+        "vi": "Tìm xe chụp ảnh tự động"
+      }
+    },
+
+    "BUTTON": {
+      "SEARCH": {
+        "en": "Search",
+        "vi": "Tìm kiếm"
+      },
+
+      "RESET": {
+        "en": "Reset",
+        "vi": "Nạp lại"
+      },
+
+      "EXCEL": {
+        "en": "Excel",
+        "vi": "Xuất Excel"
+      },
+
+
+      "IMPORT": {
+        "en": "Import",
+        "vi": "Import"
+      },
+
+      "CREATE": {
+        "en": "Create",
+        "vi": "Thêm mới"
+      },
+
+      "UPDATE": {
+        "en": "Update",
+        "vi": "Cập nhật"
+      },
+
+      "DELETE": {
+        "en": "Delete",
+        "vi": "Xóa"
+      },
+
+      "DELETEMULTI": {
+        "en": "Delete multi",
+        "vi": "Xóa nhiều"
+      },
+
+      "SAVE": {
+        "en": "Save & Continue",
+        "vi": "Lưu & tiếp tục"
+      },
+
+      "COMPLETED": {
+        "en": "Completed",
+        "vi": "Hoàn thành"
+      },
+
+      "BACKTOLIST": {
+        "en": "Back to list",
+        "vi": "Quay lại danh sách"
+      },
+
+      "REMOVE": {
+        "en": "Remove",
+        "vi": "Xóa không điều kiện"
+      },
+
+      "Print": {
+        "en": "Print",
+        "vi": "In"
+      },
+
+      "SaveDraft": {
+        "en": "Save Draft",
+        "vi": "Lưu nháp"
+      }
+    },
+
+    "TABLE": {
+      "NAME": {
+        "en": "Name",
+        "vi": "Tên"
+      },
+
+      "PLATE": {
+        "en": "Plate",
+        "vi": "Biển số"
+      },
+
+      "DESCRIPTION": {
+        "en": "Description",
+        "vi": "Mô tả"
+      },
+
+      "CARDGROUP": {
+        "en": "CardGroup",
+        "vi": "Nhóm thẻ"
+      },
+
+      "CUSTOMERGROUP": {
+        "en": "Customer group",
+        "vi": "Nhóm khách hàng"
+      },
+
+      "STATUS": {
+        "en": "Status",
+        "vi": "Trạng thái"
+      },
+
+      "ACTIVE": {
+        "en": "Active",
+        "vi": "Kích hoạt"
+      },
+
+      "INACTIVE": {
+        "en": "Inactive",
+        "vi": "Chưa kích hoạt"
+      },
+
+      "CARDTYPES": {
+        "en": "CardType",
+        "vi": "Loại thẻ"
+      },
+
+      "ISHAVEMONEYEXCESSTIME": {
+        "en": "include Overtime Fee",
+        "vi": "Tính tiền thẻ thuê bao quá giờ"
+      },
+
+      "VEHICLEGROUP": {
+        "en": "VehicleGroup",
+        "vi": "Nhóm xe"
+      },
+
+      "LANEASSIGN": {
+        "en": "Assign Lane For Card Group",
+        "vi": "Phân làn cho nhóm thẻ"
+      },
+
+      "ENABLEFREE": {
+        "en": "Free Duration",
+        "vi": "Miễn phí trong khoảng thời gian (phút) &lt;="
+      },
+
+      "DayTimeFrom": {
+        "en": "Valid time from",
+        "vi": "TG ban ngày(TG hợp lệ thẻ thuê bao) từ"
+      },
+
+      "DayTimeTo": {
+        "en": "to",
+        "vi": "đến"
+      },
+
+      "Formulation": {
+        "en": "Formulation",
+        "vi": "Tính phí theo"
+      },
+
+      "SortOrder": {
+        "en": "Ordering",
+        "vi": "STT"
+      },
+
+      "IsCheckPlate": {
+        "en": "Check Plate?",
+        "vi": "Kiểm tra biển số"
+      },
+
+      "IsHaveMoneyExpiredDate": {
+        "en": "IsHaveMoneyExpiredDate",
+        "vi": "Tính tiền thuê bao hết hạn sử dụng"
+      },
+
+      "TurnFee": {
+        "en": "Fee",
+        "vi": "Phí lượt"
+      },
+
+      "TimePeriod": {
+        "en": "Time Period",
+        "vi": "Khoảng thời gian"
+      },
+
+      "TimePeriodFee": {
+        "en": "Fee",
+        "vi": "Phí tương ứng"
+      },
+
+      "Block": {
+        "en": "Block",
+        "vi": "Block"
+      },
+
+      "Time": {
+        "en": "Time (minute(s))",
+        "vi": "Thời gian (phút)"
+      },
+
+      "CardNo": {
+        "en": "CardNo",
+        "vi": "CardNo"
+      },
+
+      "CardNumber": {
+        "en": "CardNumber",
+        "vi": "Mã thẻ"
+      },
+
+      "ExpireDate": {
+        "en": "Expire date",
+        "vi": "Ngày hết hạn"
+      },
+
+      "CustomerCode": {
+        "en": "Customer Code",
+        "vi": "Mã KH"
+      },
+
+      "CustomerName": {
+        "en": "Customer Name",
+        "vi": "Tên KH"
+      },
+
+      "Address": {
+        "en": "Address",
+        "vi": "Địa chỉ"
+      },
+
+      "ImportDate": {
+        "en": "Import date",
+        "vi": "Ngày tạo"
+      },
+
+      "LEVEL": {
+        "en": "Level",
+        "vi": "Quyền truy cập"
+      },
+
+      "ExpiredDate": {
+        "en": "Expire date",
+        "vi": "Ngày hết hạn"
+      },
+
+      "ControllerName": {
+        "en": "Controller",
+        "vi": "Tên bộ điều khiển"
+      },
+
+      "ControllerGroup": {
+        "en": "Controller's Group",
+        "vi": "Nhóm bộ điều khiển"
+      },
+      "TotalMoneys": {
+        "en": "TotalMoneys",
+        "vi": "Tổng tiền"
+      }
+    },
+
+    "SUBHEADER": {
+      "CONTROLLER": {
+        "en": "CONTROLLERS",
+        "vi": "BỘ ĐIỀU KHIỂN"
+      },
+      "CARD": {
+        "en": "CARDS",
+        "vi": "THẺ"
+      },
+      "CONFIG": {
+        "en": "CONFIGS",
+        "vi": "CẤU HÌNH"
+      },
+      "ACTION": {
+        "en": "ACTIONS",
+        "vi": "XỬ LÝ"
+      },
+      "PROGRESS": {
+        "en": "PROGRESSES",
+        "vi": "TIẾN ĐỘ"
+      },
+      "CUSTOMER": {
+        "en": "CUSTOMERS",
+        "vi": "KHÁCH HÀNG"
+      },
+      "PROJECT": {
+        "en": "PROJECTS",
+        "vi": "Dự án"
+      },
+      "SCHEDULE": {
+        "en": "SCHEDULES",
+        "vi": "Kế hoạch"
+      },
+      "NOTIFICATION": {
+        "en": "NOTIFICATIONS",
+        "vi": "Thông báo"
+      },
+      "TASK": {
+        "en": "TASKS",
+        "vi": "Công việc"
+      }
+    }
+  },
+
+  "STATICLIST": {
+
+    "DEFAULT": {
+      "en": "-- Select --",
+      "vi": "-- Lựa chọn --"
+    },
+
+    "TURN": {
+      "en": "Turn",
+      "vi": "Lượt"
+    },
+
+    "BLOCK": {
+      "en": "Block",
+      "vi": "Block"
+    },
+
+    "PERIODTIME": {
+      "en": "Period of time",
+      "vi": "Khoảng thời gian"
+    },
+
+    "MONTHLYTICKET": {
+      "en": "Monthly ticket",
+      "vi": "Thuê bao"
+    },
+
+    "TICKETEACHTIME": {
+      "en": "Ticket each time",
+      "vi": "Vé lượt"
+    },
+
+    "FREETICKET": {
+      "en": "Free tickets",
+      "vi": "Vé miến phí"
+    },
+
+    "CARDACTIVE": {
+      "en": "Activity card",
+      "vi": "Thẻ hoạt động"
+    },
+
+    "CARDINACTIVE": {
+      "en": "Card is lock",
+      "vi": "Thẻ khóa"
+    },
+
+    "PLACEHOLDER": {
+      "PC": {
+        "en": "Select computer",
+        "vi": "Lựa chọn máy tính"
+      },
+      "LINE": {
+        "en": "Select line",
+        "vi": "Lựa chọn line"
+      },
+      "CONTROLLERGROUP": {
+        "en": "Select group controller",
+        "vi": "Lựa chọn nhóm bộ điều khiển"
+      },
+      "LEVEL": {
+        "en": "Select level",
+        "vi": "Lựa chọn quyền truy cập"
+      },
+      "CARDGROUP": {
+        "en": "Select group card",
+        "vi": "Lựa chọn nhóm thẻ"
+      },
+      "CUSTOMERGROUP": {
+        "en": "Select group customer",
+        "vi": "Lựa chọn nhóm khách hàng"
+      }
+    },
+
+    "TITLE": {
+      "PC": {
+        "en": "Computer:",
+        "vi": "Máy tính:"
+      },
+      "CONTROLLER": {
+        "en": "Controllers",
+        "vi": "Bộ điều khiển"
+      },
+      "CARD": {
+        "en": "Cards",
+        "vi": "Thẻ"
+      },
+      "CUSTOMER": {
+        "en": "Customers",
+        "vi": "Khách hàng"
+      },
+      "LEVEL": {
+        "en": "Level:",
+        "vi": "Quyền truy cập:"
+      },
+      "CUSTOMERGROUP": {
+        "en": "Customer's Group:",
+        "vi": "Nhóm khách hàng:"
+      },
+      "CONTROLLERGROUP": {
+        "en": "Controller's Group:",
+        "vi": "Nhóm bộ điều khiển:"
+      },
+      "CARDGROUP": {
+        "en": "Card's Group:",
+        "vi": "Nhóm thẻ:"
+      },
+      "ERROR": {
+        "en": "ERRORS:",
+        "vi": "LỖI:"
+      },
+      "SUCCESS": {
+        "en": "SUCCESSES:",
+        "vi": "THÀNH CÔNG:"
+      },
+      "DELAY": {
+        "en": "Delay (ms)",
+        "vi": "Đỗ trễ (ms)"
+      },
+      "NEWEXPIREDATE": {
+        "en": "New expire date:",
+        "vi": "Ngày hết hạn mới:"
+      },
+      "ISNEWEXPIREDATE": {
+        "en": "Is using?",
+        "vi": "Có sử dụng ?"
+      },
+      "DELETECARD": {
+        "en": "Delete cards by controller",
+        "vi": "Hủy thẻ theo bộ điều khiển"
+      },
+      "DELETECUSTOMER": {
+        "en": "Delete fingers by controller",
+        "vi": "Hủy vân tay theo bộ điều khiển"
+      },
+      "UPLOADCARDSELECT": {
+        "en": "Upload <span class='txtCardSelected'>0</span> selected card",
+        "vi": "Nạp <span class='txtCardSelected'>0</span> thẻ đã chọn"
+      },
+      "DELETECARDSELECT": {
+        "en": "Delete <span class='txtCardSelected'>0</span> selected card",
+        "vi": "Hủy <span class='txtCardSelected'>0</span> thẻ đã chọn"
+      },
+      "UPLOADCUSTOMERSELECT": {
+        "en": "Upload <span class='txtCustomerSelected'>0</span> selected customer",
+        "vi": "Nạp <span class='txtCardSelected'>0</span> khách hàng đã chọn"
+      },
+      "DELETECUSTOMERSELECT": {
+        "en": "Delete <span class='txtCustomerSelected'>0</span> selected customer",
+        "vi": "Hủy <span class='txtCardSelected'>0</span> khách hàng đã chọn"
+      },
+      "CANCEL": {
+        "en": "CANCEL",
+        "vi": "HỦY XỬ LÝ"
+      }
+    }
+  },
+
+  "MESSAGE": {
+
+    "RECORD": {
+      "EXISTS": {
+        "en": "The record already exists",
+        "vi": "Bản ghi đã tồn tại"
+      },
+
+      "NOTEXISTS": {
+        "en": "The record does not exist",
+        "vi": "Bản ghi không tồn tại"
+      },
+
+      "deleteConfirm": {
+        "en": "Are you sure you want to delete this record?",
+        "vi": "Bạn có chắc chắn muốn xóa bản ghi này?"
+      },
+
+      "reason": {
+        "en": "What is your reason ?",
+        "vi": "Lý do của bạn là gì ?"
+      }
+    },
+
+    "CARDGROUP": {
+
+      "NAME": {
+        "en": "Card group name can't be blank",
+        "vi": "Vui lòng nhập tên nhóm thẻ"
+      },
+
+      "LANE": {
+        "en": "Please divide the lane for the card group",
+        "vi": "Vui lòng phân làn cho nhóm thẻ"
+      },
+
+      "EXISTS": {
+        "en": "The card group already exists",
+        "vi": "Nhóm thẻ đã tồn tại"
+      }
+
+    },
+
+
+    "CARD": {
+      "CARDEXISTS": {
+        "en": "Card Number already exists",
+        "vi": "Mã thẻ đã tồn tại"
+      },
+
+      "CARDNOTEXISTS": {
+        "en": "The card does not exist in the system",
+        "vi": "Mã thẻ không tồn tại trong hệ thống"
+      },
+
+      "CHECKCARDEVENT": {
+        "en": "The card is existing in the event. Can not delete",
+        "vi": "Thẻ đang có sự kiện. Không thể xóa"
+      },
+
+      "NAME": {
+        "en": "Card number can't be blank",
+        "vi": "Vui lòng nhập mã thẻ"
+      },
+
+      "EXISTS": {
+        "en": "The card already exists",
+        "vi": "Thẻ đã tồn tại"
+      },
+
+      "openCardConfirm": {
+        "en": "Are you sure you want to Open Card?",
+        "vi": "Bạn có chắc chắn muốn mở khóa những thẻ này?"
+      },
+
+      "lockCardConfirm": {
+        "en": "Are you sure you want to Lock Card?",
+        "vi": "Bạn có chắc chắn muốn khóa những thẻ này?"
+      },
+
+      "Please_enter_the_CardNo": {
+        "en": "Please enter the Card No",
+        "vi": "Vui lòng nhập số thẻ"
+      },
+
+      "Please_enter_the_Card_Number": {
+        "en": "Please enter the Card Number",
+        "vi": "Vui lòng nhập mã thẻ"
+      },
+
+      "please_select_card_group": {
+        "en": "Please select Card Group",
+        "vi": "Vui lòng chọn nhóm thẻ"
+      }
+    }
+  },
+  "CUSTOMERGROUP": {
+
+    "NAME": {
+      "en": "Customer Group name can't be blank",
+      "vi": "Vui lòng nhập tên nhóm khách hàng"
+    },
+
+    "EXISTS": {
+      "en": "The Customer group already exists",
+      "vi": "Nhóm khách hàng đã tồn tại"
+    }
+
+  },
+  "MESSAGEREPORT": {
+    "ADD": {
+      "SUCCESS": {
+        "en": "Success added",
+        "vi": "Thêm mới thành công"
+      }
+    },
+    "UPDATE": {
+      "SUCCESS": {
+        "en": "Success updated",
+        "vi": "Cập nhật thành công"
+      }
+    },
+    "REMOVE": {
+      "SUCCESS": {
+        "en": "Success removed",
+        "vi": "Xóa thành công"
+      }
+    }
+  }
+}

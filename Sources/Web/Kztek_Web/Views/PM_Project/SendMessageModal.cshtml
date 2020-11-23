@@ -1,0 +1,57 @@
+﻿@model Kztek_Library.Models.OS_MessageModal
+
+@{
+
+}
+
+<div class="modal fade" id="@Model.Data_Modal.idmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @Html.Hidden("hidProjectId", Model.Data_Modal.idrecord)
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Model.Data_Modal.title</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label-right no-padding-right">
+                                    Tiêu đề <span style="color:red">*</span></label>
+                                <div class="col-sm-9 col-xs-12">
+                                    @Html.TextBox("messageTitle", Model.Data.Title, new { @class = "form-control",
+                                    @placeholder = "Tiêu đề" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label-right no-padding-right">
+                                    Mô tả </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    @Html.TextArea("messsageDescription", Model.Data.Description, new { @class = "form-control",
+                                    @placeholder = "Mô tả tin nhắn" }) 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label-right no-padding-right">
+                                    Gửi cho ai</label>
+                                <div class="col-sm-9 col-xs-12">
+                                   @await Component.InvokeAsync("ChosenSelect", Model.Select_Users)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmMessage">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

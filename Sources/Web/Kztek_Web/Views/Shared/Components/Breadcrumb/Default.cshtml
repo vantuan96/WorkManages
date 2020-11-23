@@ -1,0 +1,25 @@
+@model Kztek_Library.Models.BreadcrumbModel
+
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href='@Url.Action("Index","Home")'>Trang chủ</a>
+    </li>
+    @if (Model.Data.Any())
+    {
+        foreach (var item in Model.Data)
+        {
+            <li>
+				@if(item.isFolder) {
+<span>@item.MenuName</span>
+				} else {
+@Html.ActionLink(item.MenuName, item.ActionName, item.ControllerName)
+				}
+                
+            </li>
+        }
+    }
+    <li class="active">@if(@Model.CurrentView !=null) {
+        <span>@Model.CurrentView.MenuName</span>
+        }</li>
+</ul><!-- /.breadcrumb -->

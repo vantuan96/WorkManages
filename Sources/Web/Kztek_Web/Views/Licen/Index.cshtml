@@ -1,0 +1,120 @@
+﻿@model Kztek_Core.Models.GridModel<Kztek_Model.Models.MN.MN_License>
+
+@{
+    ViewBag.Title = "Danh sách dự án";
+
+
+}
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Licen", FormMethod.Get, new { id = "frmLicense" }))
+    {
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Tìm kiếm</label>
+            <input type="text" name="key" value="@ViewBag.key" placeholder="Từ khóa" class="form-control" />
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ ngày</label>
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.Fromdate, new
+           { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Đến ngày</label>
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.Todate, new
+           { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>   
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            <button type="button" class="btn btn-white btn-primary" name="btnFilter">
+                <i class="fa fa-search" aria-hidden="true">Tìm kiếm</i>
+            </button>
+            <a href='@Url.Action("Index", "Licen")' class="btn btn-primary btn-white" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+                
+            </a>
+        </div>
+    }
+</div>
+
+<div>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Dự án
+                    </th>
+                    <th>
+                        Hạn
+
+                    </th>
+                    <th>
+                        Có check hạn
+                    </th>
+                    <th>
+                        Xử lý
+                    </th>
+                </tr>
+            </thead>
+
+
+            @if (Model.Data.Any())
+            {
+                foreach (var item in Model.Data)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.ProjectName</td>
+                            <td>@item.ExpireDate</td>
+                            <td>@item.IsExpire</td>
+                            <td></td>
+                    </tbody>
+                }
+            }
+
+        </table>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "Licen", new
+           {
+               page = x,
+               key = ViewBag.key,
+           }))
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('button[name=btnFilter]').click(function () {
+                $('#frmLicense').submit();
+            })
+        })
+    </script>
+}

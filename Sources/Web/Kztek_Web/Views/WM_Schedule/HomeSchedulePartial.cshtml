@@ -1,0 +1,51 @@
+@model Kztek_Model.Models.WM.WM_Schedule
+
+@Html.Hidden("hidScheduleId", Model != null ? Model.Id : "")
+
+<h3 class="header smaller lighter green">
+         @await Component.InvokeAsync("Language", new { path = "BODY:SUBHEADER:SCHEDULE" })
+        </h3>
+
+<table id="tblSchedule" class="table table-bordered table-hover">
+    <tbody>
+        @if (Model != null) {
+            <tr>
+            <td>Tiêu đề</td>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <td>Mô tả</td>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <td>Bắt đầu</td>
+            <td>@Model.DateStart</td>
+        </tr>
+        <tr>
+            <td>Kết thúc</td>
+            <td>@Model.DateEnd</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="button" class="btn btn-sm btn-primary btnAddDiary" idata="@Model.Id">
+                    Thêm nhật ký công việc
+                </button>
+            </td>
+        </tr>
+        } else {
+            <tr>
+                <td colspan="2">
+                    <strong>Chưa có kế hoạch trong tuần này</strong>
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+
+<div id="boxDiary" style="overflow-y: scroll; max-height: 300px;">
+    <table id="tblDiary" class="table table-bordered table-hover">
+        <tbody></tbody>
+    </table>
+</div>
+

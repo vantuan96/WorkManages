@@ -1,0 +1,148 @@
+@model Kztek_Model.Models.SY_User_Submit
+
+@{
+ViewBag.Title = "Thêm mới tài khoản";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Create", "SY_User", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmUser" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(n => n.RoleIds)
+    @Html.Hidden("SaveAndCountinue", false)
+
+    <div class="col-xs-7">
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right">
+                Email <span style="color:red">*</span></label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Username, new { @class = "form-control",
+                @placeholder = "Email" }) @Html.ValidationMessageFor(n =>
+                n.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Mật khẩu </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Password, new { @class = "form-control",
+                @type = "password" }) @Html.ValidationMessageFor(n =>
+                n.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+         <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Nhập lại Mật khẩu </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.RePassword, new { @class = "form-control",
+                @type = "password" }) @Html.ValidationMessageFor(n =>
+                n.RePassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Họ tên </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Name, new { @class = "form-control",
+                @placeholder = "Họ tên" }) @Html.ValidationMessageFor(n =>
+                n.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> SĐT </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Phone, new { @class = "form-control",
+                @placeholder = "Số điện thoại" }) @Html.ValidationMessageFor(n =>
+                n.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Admin </label>
+            <div class="col-sm-8">
+                <label class="line-height-250">
+                    @Html.CheckBoxFor(n => n.isAdmin, new { @class = "ace" })
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Kích hoạt </label>
+            <div class="col-sm-8">
+                <label class="line-height-250">
+                    @Html.CheckBoxFor(n => n.Active, new { @class = "ace" })
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-5">
+        @await Html.PartialAsync("RolesPartial", new Kztek_Model.Models.SY_User_Selected() {
+            Selected = Model.Roles,
+            Data_Role = Model.Data_Role
+        })
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "SY_User",
+          ActionName = "Create",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#Countinue").click(function () {
+            $("#SaveAndCountinue").val("true");
+        });
+
+            $(".chkCheckBox").click(function() {
+                var cmd = $(this);
+                cmd.parent().parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            $("span.liMenuFunction").click(function() {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.liMenuFunction').parent().parent().fadeToggle();
+            });
+
+           $("#frmUser").submit(function () {
+                var lstId = "";
+
+                $("input[name='chkCheckBox']").each(function() {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+
+                    if ($(this).is(":checked")) {
+                        lstId = lstId + id + ";";
+                    }
+                });
+
+                $("#RoleIds").val(lstId);
+            }); 
+    });
+</script>
+}

@@ -1,0 +1,109 @@
+@model Kztek_Library.Models.WM_TaskSubmit
+
+@{
+ViewBag.Title = "Thêm mới task";
+
+    var selectUser = (Kztek_Library.Models.SelectListModel_Chosen)ViewBag.Select_User;
+    var selectStatus = (Kztek_Library.Models.SelectListModel_Chosen)ViewBag.Select_Status;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Create", "WM_Task", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmUser" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.Hidden("SaveAndCountinue", false)
+
+    <div class="col-xs-10">
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right">
+                Tiêu đề <span style="color:red">*</span></label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Title, new { @class = "form-control",
+                @placeholder = "Tiêu đề" }) @Html.ValidationMessageFor(n =>
+                n.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Mô tả </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                @placeholder = "Mô tả" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Ngày bắt đầu </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.DateStart, new { @class = "form-control dtp_input",
+                @placeholder = "Ngày bắt đầu" }) @Html.ValidationMessageFor(n =>
+                n.DateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Ngày kết thúc </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.DateEnd, new { @class = "form-control dtp_input",
+                @placeholder = "Ngày kết thúc" }) @Html.ValidationMessageFor(n =>
+                n.DateStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Trạng thái </label>
+            <div class="col-sm-6 col-xs-12">
+                @await Component.InvokeAsync("ChosenSelect", selectStatus)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Người tham gia </label>
+            <div class="col-sm-6 col-xs-12">
+                @await Component.InvokeAsync("ChosenSelect", selectUser)
+            </div>
+        </div>
+
+       
+    </div>
+
+    <div class="col-xs-2">
+        
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "WM_Task",
+          ActionName = "Create",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+       $("#Countinue").click(function () {
+            $("#SaveAndCountinue").val("true");
+        });
+    });
+</script>
+}

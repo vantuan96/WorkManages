@@ -1,0 +1,117 @@
+@model List<Kztek_Model.Models.SY_MenuFunction>
+
+@{
+    ViewBag.Title = "Danh mục hệ thống";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <a href='@Url.Action("Create", "SY_MenuFunction")' class="btn btn-sm btn-white btn-success">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+            <a href='javascript:void(0)' class="btn btn-sm btn-white btn-danger" id="btnMultiDelete">
+                <i class=" fa fa-trash"></i> Xóa nhiều
+            </a>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <ul class="treeCustom">
+            @if (Model.Any())
+            {
+                var listParent = Model.Where(c => c.ParentId == "");
+                foreach (var item in listParent)
+                 {
+                     var childItem = Model.Where(c => c.ParentId == item.Id).ToList();
+                     <li>
+                         <label style="margin-bottom: 0px;">
+                             <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id.ToString()" class="ace chkCheckBox"/>
+                             <span class="lbl"></span>
+                         </label>
+                         <span class="liMenuFunction" style="font-weight: 700; color: #333;">
+                             @if (item.Active)
+                             {
+                                 <span>@item.SortOrder</span>
+                                 <span>. @item.MenuName</span>
+                             }
+                             else
+                             {
+                                 <span style="text-decoration: line-through">
+                                     <span>@item.SortOrder</span> <span>. @item.MenuName</span>
+                                 </span>
+
+                             }
+                         </span>
+                         <span>
+                             <a href='@Url.Action("Update", "SY_MenuFunction", new { id = item.Id.ToString() })'>
+                                 <i class="ace-icon fa fa-pencil-square-o"></i>
+                             </a>
+                         </span>
+                        
+                         @if (childItem.Any())
+                         {
+                              @await Html.PartialAsync("SubMenu", new Kztek_Model.Models.SY_MenuFunction_Tree() {
+                        Data_Child = childItem,
+                        Data_All = Model
+                    })
+                         }
+
+                     </li>
+                 }
+            }
+
+            
+        </ul>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $(".chkCheckBox").click(function() {
+                var cmd = $(this);
+                cmd.parent().parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            $("span.liMenuFunction").click(function() {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.liMenuFunction').parent().parent().fadeToggle();
+            });
+
+            $("#btnMultiDelete").click(function() {
+                var lstdeleteId = "";
+
+                $("input[name='chkCheckBox']").each(function() {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+
+                    if ($(this).is(":checked")) {
+                        lstdeleteId = lstdeleteId + id + ";";
+                    }
+                });
+
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result){
+                    if (result) {
+                        JSHelper.AJAX_Delete('/SY_MenuFunction/Delete', lstdeleteId)
+                        .success(function(response) {
+                           if(response.isSuccess) {
+                               window.location.href = '/SY_MenuFunction';
+                           } else {
+                               toastr.Error(response.Message)
+                           }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

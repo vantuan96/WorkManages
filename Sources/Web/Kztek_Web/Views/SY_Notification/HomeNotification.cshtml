@@ -1,0 +1,35 @@
+@model List<Kztek_Model.Models.SY_Notification>
+
+<h3 class="header smaller lighter purple">
+         @await Component.InvokeAsync("Language", new { path = "BODY:SUBHEADER:NOTIFICATION" })
+        </h3>
+
+<div style="overflow-y: auto; max-height: 500px;">
+    <table id="tblNotification" class="table table-bordered table-hover">
+    <tbody>
+        @foreach (var item in Model)
+        {
+           <tr>
+               <td colspan="2">
+                    <table class="table table-bordered">
+                       <tbody>
+                           <tr>
+                               <td>Tiêu đề</td>
+                               <td>@item.Title</td>
+                           </tr>
+                           <tr>
+                               <td>Mô tả</td>
+                               <td>@item.Description</td>
+                           </tr>
+                           <tr>
+                               <td>Ngày tạo</td>
+                               <td>@item.DateCreated</td>
+                           </tr>
+                       </tbody>
+                    </table>
+               </td>
+           </tr>
+        }
+    </tbody>
+</table>
+</div>

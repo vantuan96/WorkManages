@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kztek_Core\Kztek_Core.csproj" />
+    <ProjectReference Include="..\Kztek_Model\Kztek_Model.csproj" />
+    <ProjectReference Include="..\Kztek_Data\Kztek_Data.csproj" />
+    <ProjectReference Include="..\Kztek_Library\Kztek_Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+    </PackageReference>
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\Implementations\MYSQL\" />
+    <Folder Include="Api\Implementations\SQLSERVER\" />
+    <Folder Include="Admin\Interfaces\PM\" />
+    <Folder Include="Admin\Implementations\MONGO\PM\" />
+    <Folder Include="OneSignalr\" />
+    <Folder Include="OneSignalr\Interfaces\" />
+    <Folder Include="OneSignalr\Implementations\" />
+    <Folder Include="OneSignalr\Implementations\MONGO\" />
+    <Folder Include="Admin\Interfaces\MN\" />
+    <Folder Include="Admin\Implementations\MONGO\MN\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>

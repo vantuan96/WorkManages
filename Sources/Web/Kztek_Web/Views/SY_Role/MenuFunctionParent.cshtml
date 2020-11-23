@@ -1,0 +1,34 @@
+@model Kztek_Model.Models.SY_Role_Selected
+
+<ul class="treeCustom">
+            @if (Model.Data_Tree.Any())
+            {
+                var listParent = Model.Data_Tree.Where(c => c.ParentId == "");
+                foreach (var item in listParent)
+                 {
+                     var childItem = Model.Data_Tree.Where(c => c.ParentId == item.Id).ToList();
+                     <li>
+                         <label style="margin-bottom: 0px;">
+                             <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" @string.Format("{0}", Model.Selected.Contains(item.Id) ? "checked" : "" )/>
+                             <span class="lbl"></span>
+                         </label>
+                         <span class="liMenuFunction" style="font-weight: 700; color: #333;">
+                             <span>@item.SortOrder</span>
+                                 <span>. @item.MenuName</span>
+                         </span>
+                        
+                         @if (childItem.Any())
+                        {
+                            @await Html.PartialAsync("MenuFunctionChild", new Kztek_Model.Models.SY_Role_Selected() {
+                                Data_Tree = Model.Data_Tree,
+                                Selected = Model.Selected,
+                                Data_Child = childItem
+                            })
+                        }
+
+                     </li>
+                 }
+            }
+
+            
+        </ul>

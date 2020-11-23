@@ -1,0 +1,7 @@
+﻿@model List<Kztek_Model.Models.MN.MN_Contact>
+
+
+@foreach (var item in Model)
+{
+    @await Html.PartialAsync("NewContactPartial", item)
+}

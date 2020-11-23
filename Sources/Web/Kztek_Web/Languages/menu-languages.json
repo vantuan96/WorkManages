@@ -1,0 +1,82 @@
+﻿{
+  "Home": {
+    "Index": {
+      "en": "Home",
+      "vi": "Bàn làm việc"
+    }
+  },
+  "SY_User": {
+    "Index": {
+      "en": "Users",
+      "vi": "Người dùng"
+    }
+  },
+  "SY_Role": {
+    "Index": {
+      "en": "Roles",
+      "vi": "Vai trò, quyền hạn"
+    }
+  },
+  "SY_MenuFunction": {
+    "Index": {
+      "en": "Menus",
+      "vi": "Danh mục hệ thống"
+    }
+  },
+
+  "controller_81478553": {
+    "action_81478553": {
+      "en": "Reports",
+      "vi": "Báo cáo"
+    }
+  },
+
+  "controller_67797447": {
+    "action_67797447": {
+      "en": "Card management",
+      "vi": "Quản lý thẻ"
+    }
+  },
+
+  "controller_55844880": {
+    "action_55844880": {
+      "en": "Customer management",
+      "vi": "Quản lý khách hàng"
+    }
+  },
+
+  "controller_71080602": {
+    "action_71080602": {
+      "en": "Categories",
+      "vi": "Danh mục"
+    }
+  },
+
+  "controller_81507875": {
+    "action_81507875": {
+      "en": "Setups",
+      "vi": "Cài đặt"
+    }
+  },
+
+  "Controller_96015492": {
+    "action_96015492": {
+      "en": "Communicating",
+      "vi": "Giao tiếp"
+    }
+  },
+
+  "controller_35537716": {
+    "action_35537716": {
+      "en": "Systems",
+      "vi": "Hệ thống"
+    }
+  },
+
+  "Controller_43cbacfc-c3f9-487b-a98d-40cee376151b": {
+    "Action_43cbacfc-c3f9-487b-a98d-40cee376151b": {
+      "en": "Systems",
+      "vi": "Hệ thống"
+    }
+  }
+}

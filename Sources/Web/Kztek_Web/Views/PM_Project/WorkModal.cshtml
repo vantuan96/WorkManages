@@ -1,0 +1,40 @@
+﻿@model Kztek_Library.Models.PM_WorkModal
+
+@{
+
+}
+
+<div class="modal fade" id="@Model.Data_Modal.idmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @Html.Hidden("hidComponentId", Model.Data_Modal.idrecord)
+    @Html.Hidden("hidProjectId", Model.Data_Modal.idsub)
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Model.Data_Modal.title</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label-right no-padding-right">
+                                    Người tham gia</label>
+                                <div class="col-sm-9 col-xs-12">
+                                   @await Component.InvokeAsync("ChosenSelect", Model.Select_User)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmWork">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

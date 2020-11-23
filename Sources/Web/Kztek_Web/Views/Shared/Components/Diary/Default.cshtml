@@ -1,0 +1,33 @@
+@model List<Kztek_Library.Models.WM_DiaryCustomViewModel>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nhân viên</th>
+            <th>Tiêu đề - Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    <table class="table">
+                        <tbody>
+                            @foreach (var itemD in item.DataByUser)
+                            {
+                                <tr>
+                                    <td>@itemD.Title</td>
+                                    <td>@itemD.Description</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

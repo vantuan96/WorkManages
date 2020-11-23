@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "So sánh hiệu quả";
+}
+
+<div class="page-header">
+    <h1>
+       @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-4">
+        @await Component.InvokeAsync("ChosenSelect", ViewBag.Select_User)
+
+    <button class="btn btn-sm btn-primary btnSearchTeam" type="button" style="margin-top:10px">
+        <i class="fa fa-search"></i>
+        Search
+    </button>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-hover" id="btlReport">
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+@section scripts{
+    <link href="~/js/ext/Chart.js/Chart.css" rel="stylesheet" />
+    <script src="~/js/ext/Chart.js/Chart.js"></script>
+    <script src="~/modules/SY_ReportController.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            
+        });
+    </script>
+}

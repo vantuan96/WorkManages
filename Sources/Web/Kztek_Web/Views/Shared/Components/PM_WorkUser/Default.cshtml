@@ -1,0 +1,13 @@
+@model Kztek_Library.Models.PM_WorkUserModel
+
+<ul style="list-style-type: none">
+    @foreach (var item in Model.Data_User)
+    {
+        var k = Model.Data_Work.FirstOrDefault(n => n.UserId == item.Id);
+        <li>
+            <label class='label label-lg @string.Format("label-{0}", k != null ? (k.IsCompleted ? "success" : "warning") : "default")'>
+                @item.Username
+            </label>
+        </li>
+    }
+</ul><!-- /.breadcrumb -->

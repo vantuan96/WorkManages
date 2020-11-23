@@ -1,0 +1,88 @@
+@model Kztek_Library.Models.SidebarModel
+
+<script type="text/javascript">
+				try{ace.settings.loadState('main-container')}catch(e){}
+			</script>
+
+			<div id="sidebar" class="sidebar                  responsive                    ace-save-state sidebar-fixed">
+				<script type="text/javascript">
+					try{ace.settings.loadState('sidebar')}catch(e){}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div><!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+    @if (Model.Data.Any())
+    {
+        foreach (var item in Model.Data.Where(n => n.ParentId == "" && n.MenuType == "1").OrderBy(n => n.SortOrder))
+        {
+            var child = Model.Data.Where(n => n.ParentId.Equals(item.Id) && n.MenuType.Equals("1"));
+            if (child.Any())
+            {
+                <li class='@string.Format("{0}", Model.Breadcrumb.Contains(item.Id)? "open active" : "")'>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon @item.Icon"></i>
+                        <span class="menu-text">
+                            @await Component.InvokeAsync("MenuLanguage", new { path=string.Format("{0}:{1}", item.ControllerName, item.ActionName), menuname = item.MenuName })
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+					@await Html.PartialAsync("~/Views/Shared/Components/Sidebar/SidebarSubPartial.cshtml", new Kztek_Library.Models.SidebarModel() { 
+						ControllerName = Model.ControllerName,
+						ActionName = Model.ActionName,
+						Breadcrumb = Model.Breadcrumb,
+						CurrentView = Model.CurrentView,
+						Data = Model.Data,
+						Data_Child = child.ToList()
+					 })
+                </li>
+            }
+            else
+            {
+                <li class='@string.Format("{0}", (( Model.ControllerName.Equals(item.ControllerName) && Model.ActionName.Equals(item.ActionName)) || Model.ControllerName.Equals(item.ControllerName))? "active" : "")'>
+                    <a href='@Url.Action(item.ActionName, item.ControllerName)'>
+                        <i class="menu-icon @item.Icon"></i>
+                        <span class="menu-text">
+                           @await Component.InvokeAsync("MenuLanguage", new { path=string.Format("{0}:{1}", item.ControllerName, item.ActionName), menuname = item.MenuName })
+                        </span>
+                    </a>
+                </li>
+            }
+        }
+    }
+</ul>
+
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+			</div>

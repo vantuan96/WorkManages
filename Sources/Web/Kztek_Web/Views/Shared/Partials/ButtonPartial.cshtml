@@ -1,0 +1,111 @@
+﻿@model Kztek_Library.Models.AuthPartialModel
+
+@if (Model.ActionName == "Create")
+{
+    <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+        <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+            <i class="ace-icon fa fa-cog bigger-130"></i>
+        </div>
+
+        <div class="ace-settings-box clearfix open" id="ace-settings-box">
+            <!-- /.pull-left -->
+            <div class="bg-rightbox">
+                <div class="clearfix lineButton">
+                    <div class="col-md-12 input-group">
+                        <button class="btn btn-success" type="submit" id="Countinue">
+                            <i class="ace-icon fa fa-refresh bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:SAVE" })
+                        </button>
+                        <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:COMPLETED" })
+                        </button>
+                        <button class="btn btnReset" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:RESET" })
+                        </button>
+                        <a href='@Url.Action("Index", Model.ControllerName, Model.model)' class="btn btn-yellow">
+                            <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:BACKTOLIST" })
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.pull-left -->
+        </div><!-- /.ace-settings-box -->
+    </div>
+}
+
+@if (Model.ActionName == "Update")
+{
+    <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+        <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+            <i class="ace-icon fa fa-cog bigger-130"></i>
+        </div>
+
+        <div class="ace-settings-box clearfix open" id="ace-settings-box">
+            <!-- /.pull-left -->
+            <div class="bg-rightbox">
+                <div class="clearfix lineButton">
+                    <div class="col-md-12 input-group">
+                        <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:COMPLETED" })
+                        </button>
+                        <button class="btn btnReset" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:RESET" })
+                        </button>
+                        <a href='@Url.Action("Index", Model.ControllerName, Model.model)' class="btn btn-yellow">
+                            <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:BACKTOLIST" })
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.pull-left -->
+        </div><!-- /.ace-settings-box -->
+    </div>
+
+}
+
+@if (Model.ActionName == "BackList")
+{
+    <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+        <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+            <i class="ace-icon fa fa-cog bigger-130"></i>
+        </div>
+
+        <div class="ace-settings-box clearfix open" id="ace-settings-box">
+            <!-- /.pull-left -->
+            <div class="bg-rightbox">
+                <div class="clearfix lineButton">
+                    <div class="col-md-12 input-group">
+                        <a href='javascript:void(0)' class="btn btn-primary btnNewComponent">
+                            <i class="ace-icon fa fa-plus bigger-110"></i>
+                            New component
+                        </a>
+
+                        <a href='javascript:void(0)' class="btn btn-success btnSaveChangeProject">
+                            <i class="ace-icon fa fa-save bigger-110"></i>
+                            Save change
+                        </a>
+
+                        <a href='javascript:void(0)' class="btn btn-pink btnSendMessage">
+                            <i class="ace-icon fa fa-envelope-o bigger-110"></i>
+                            Send message
+                        </a>
+
+                        <a href='@Url.Action("Index", Model.ControllerName, Model.model)' class="btn btn-yellow">
+                            <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                            @await Component.InvokeAsync("Language", new { path = "BODY:BUTTON:BACKTOLIST" })
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.pull-left -->
+        </div><!-- /.ace-settings-box -->
+    </div>
+
+}

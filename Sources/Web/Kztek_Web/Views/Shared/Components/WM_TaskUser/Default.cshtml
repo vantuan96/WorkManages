@@ -1,0 +1,29 @@
+@model List<Kztek_Library.Models.WM_TaskUserCustomView>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nhân viên</th>
+            <th>Hoàn thành</th>
+            <th>Đúng hạn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.IsCompleted
+                </td>
+                <td>
+                    @if(item.IsCompleted) {
+                        <span>@item.IsOnScheduled</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

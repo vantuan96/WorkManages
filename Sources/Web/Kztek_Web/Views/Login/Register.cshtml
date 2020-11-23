@@ -1,0 +1,74 @@
+@model Kztek_Library.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+  <div class="position-relative">
+                            <div id="signup-box" class="signup-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header green lighter bigger">
+                                            <i class="ace-icon fa fa-users blue"></i>
+                                            Tạo tài khoản mới
+                                        </h4>
+                                        <div class="space-6"></div>
+                                        <p> Vui lòng điền thông tin bên dưới: </p>
+                                        @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                                        {
+                                            @Html.ValidationSummary(false, "", new { @class="text-danger"})
+                                            <fieldset>
+                                                
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.Username, new { @class = "form-control", @placeholder = "Tên đăng nhập" })
+                                                        <i class="ace-icon fa fa-user"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.Name, new { @class = "form-control", @placeholder = "Họ tên" })
+                                                        <i class="ace-icon fa fa-book"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @placeholder = "Mật khẩu", @type = "password" })
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.RePassword, new { @class = "form-control", @placeholder = "Nhập lại mật khẩu", @type = "password" })
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <div class="clearfix">
+                                                    <button type="reset" class="width-30 pull-left btn btn-sm">
+                                                        <i class="ace-icon fa fa-refresh"></i>
+                                                        <span class="bigger-110">Nhập lại</span>
+                                                    </button>
+
+                                                    <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
+                                                        <span class="bigger-110">Đăng ký</span>
+                                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                                    </button>
+                                                </div>
+                                            </fieldset>
+                                        }
+                                    </div>
+
+                                    <div class="toolbar center">
+                                        <a href='@Url.Action("Index", "Login")' class="back-to-login-link">
+                                            <i class="ace-icon fa fa-arrow-left"></i>
+                                            Trở về đăng nhập
+                                        </a>
+                                    </div>
+                                </div><!-- /.widget-body -->
+                            </div><!-- /.signup-box -->
+                        </div><!-- /.position-relative -->

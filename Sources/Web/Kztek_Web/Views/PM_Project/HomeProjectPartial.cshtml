@@ -1,0 +1,39 @@
+﻿@model List<Kztek_Model.Models.PM.PM_Project>
+
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>
+                <p>Start: <strong> @item.DateStart.ToString("dd/MM/yyyy HH:mm") </strong></p>
+                <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+            </td>
+            <td>
+                @switch (item.Status)
+                {
+                    case 0:
+                        <span>Đang tiến hành</span>
+                        break;
+                    case 1:
+                        <span>Hoàn thành</span>
+                        break;
+                    case 2:
+                        <span>Tạm dừng</span>
+                        break;
+                    default:
+                        break;
+                }
+            </td>
+            <td class="center">
+                <div class="hidden-sm hidden-xs btn-group">
+                    <button class="btn btn-xs btn-purple btnProjectDetail" idata="@item.Id" type="button">
+						<i class="ace-icon fa fa-eye bigger-120"></i>
+					</button>
+			    </div>
+            </td>
+        </tr>
+    }
+}

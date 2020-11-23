@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-xs-9">
+        <div id="boxProjectRender">
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+              <div id="boxTaskRender"></div>
+            </div>
+            <div class="col-xs-6">
+              <div id="boxScheduleRender">
+
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div id="boxNotificationRender"></div>
+    </div>
+</div>
+
+<div id="boxDiaryModal"></div>
+
+@section scripts{
+    <script src="~/modules/PM/PM_HomeController.js">
+         
+    </script>
+    <script>
+        $(document).ready(function () {
+            PM_HomeController.init();
+        });
+    </script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "b9f1b48a-4b98-44b6-95b6-291d5ff30f83",
+          notifyButton: {
+            enable: true,
+          },
+        });
+
+        OneSignal.getUserId().then(function(userId) {
+            console.log("OneSignal User ID:", userId);
+            PM_HomeController.OneSignalrRegister(userId);
+        });
+      });
+    </script>
+}

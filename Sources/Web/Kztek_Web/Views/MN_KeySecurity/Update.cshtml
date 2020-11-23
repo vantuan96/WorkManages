@@ -1,0 +1,177 @@
+@model Kztek_Model.Models.MN.MN_KeySecurity
+
+@{
+ViewBag.Title = "Cập nhật key bảo mật";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Update", "MN_KeySecurity", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmLicense" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(n => n.Id)
+    @Html.Hidden("hidKeySecurity", Model.Id)
+
+    <div class="col-xs-5">
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right">
+                Dự án <span style="color:red">*</span></label>
+            <div class="col-sm-10 col-xs-12">
+                @Html.TextBoxFor(n => n.Name, new { @class = "form-control",
+                @placeholder = "Name" }) @Html.ValidationMessageFor(n =>
+                n.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right"> Code </label>
+            <div class="col-sm-10 col-xs-12">
+                <div class="input-group">
+					@Html.TextBoxFor(n => n.Code, new { @class = "form-control", @placeholder = "Code" })
+				    <span class="input-group-btn">
+					    <button class="btnGetCode btn btn-sm btn-default" type="button">
+						    <i class="ace-icon fa fa-key bigger-110"></i>
+						    Get code
+					    </button>
+				    </span>
+				</div>
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyA, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right"> Mô tả </label>
+            <div class="col-sm-10 col-xs-12">
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                @placeholder = "Description" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right"> Ghi chú </label>
+            <div class="col-sm-10 col-xs-12">
+                @Html.TextAreaFor(n => n.Note, new { @class = "form-control",
+                @placeholder = "Note" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right"> Key A </label>
+            <div class="col-sm-5 col-xs-12">
+                @Html.TextBoxFor(n => n.KeyA, new { @class = "form-control", @placeholder = "KeyA", @disabled="disabled" })
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyA, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label-left no-padding-right"> Key B </label>
+            <div class="col-sm-5 col-xs-12">
+               @Html.TextBoxFor(n => n.KeyB, new { @class = "form-control", @placeholder = "KeyB", @disabled="disabled" })
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyB, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="col-xs-5">
+        <div class="form-group">
+            <label class="col-sm-1 control-label-left no-padding-right"> Từ </label>
+            <div class="col-sm-5 col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="form-control dp_input" name="fromdate"/>
+                    <span class="input-group-addon">
+					    <i class="ace-icon fa fa-calendar bigger-110"></i>
+				    </span>
+                </div>
+            </div>
+            <label class="col-sm-1 control-label-left no-padding-right"> đến </label>
+            <div class="col-sm-5 col-xs-12">
+                <div class="input-group">
+                    <input type="text" class="form-control dp_input" name="todate"/>
+                    <span class="input-group-addon">
+					    <i class="ace-icon fa fa-calendar bigger-110"></i>
+				    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+              <div class="col-sm-5 col-xs-12">
+                  <button class="btnSearch btn btn-sm btn-primary" type="button">
+				    <i class="ace-icon fa fa-search bigger-110"></i>
+				    Search
+			      </button>
+              </div>
+        </div>
+
+        <table class="table table-bordered table-hover" id="tblCardList">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center"> CardNo </th>
+                    <th class="center"> Mã thẻ </th>
+                </tr>
+            </thead>
+            <tbody>
+                                   
+            </tbody>
+        </table>
+        <div id="pagination"></div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "MN_KeySecurity",
+          ActionName = "Update",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+<script src="~/js/ext/jquery.twbsPagination.js"></script>
+<script src="~/modules/MN/MN_KeyCardController.js"></script>
+
+<script>
+    $(document).ready(function () {
+        MN_KeyCardController.init();
+
+        $('.btnGetCode').click(function () {
+            var input = $(this).parent().parent().find('input');
+
+            JSHelper.AJAX_SendRequest('/MN_KeySecurity/GetCode', {})
+                .success(function (response) {
+                    input.val(response);
+                });
+        });
+
+        //$('.btnGetKey').click(function () {
+        //    var input = $(this).parent().parent().find('input');
+
+        //    JSHelper.AJAX_SendRequest('/MN_KeySecurity/GetKey', {})
+        //        .success(function (response) {
+        //            input.val(response);
+        //        });
+        //});
+    });
+</script>
+}

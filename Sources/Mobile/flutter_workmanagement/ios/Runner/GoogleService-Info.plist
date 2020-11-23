@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>351306566492-n85cmshs6hfkuo3odbnn4lqjd54cqut5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.351306566492-n85cmshs6hfkuo3odbnn4lqjd54cqut5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBA29HrwW56079ywgJz0eKzcNnlHA2_8Jg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>351306566492</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.maximusnguyen.flutterWorkmanagement</string>
+	<key>PROJECT_ID</key>
+	<string>workmanagement-2e176</string>
+	<key>STORAGE_BUCKET</key>
+	<string>workmanagement-2e176.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:351306566492:ios:3452cc8a88c3a76371cf99</string>
+	<key>DATABASE_URL</key>
+	<string>https://workmanagement-2e176.firebaseio.com</string>
+</dict>
+</plist>

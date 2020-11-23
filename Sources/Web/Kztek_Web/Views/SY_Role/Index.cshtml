@@ -1,0 +1,115 @@
+@model List<Kztek_Model.Models.SY_Role>
+
+@{
+    ViewBag.Title = "Danh sách vai trò";
+     var authModel = (Kztek_Library.Models.AuthActionModel)ViewBag.AuthValue;
+}
+
+<div class="page-header">
+    <h1>
+       @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+            @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_Role",
+                ActionName = "Create",
+                RecordId = "",
+                model = null,
+                Auth_Value = authModel
+            })
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên vai trò</th>
+                    <th class="text-left">Mô tả</th>
+                    <th class="text-left">Trạng thái</th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.RoleName
+                            </td>
+
+                            <td class="text-left">
+                                @item.Description
+                            </td>
+
+                            <td class="center">
+                                @if (item.Active == true)
+                                {
+                                    <span class="label label-sm label-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Chưa kích hoạt</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_Role",
+                ActionName = "Update",
+                RecordId = "",
+                model = new { id = item.Id },
+                Auth_Value = authModel
+            })
+
+
+                                          @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_Role",
+                ActionName = "Delete",
+                RecordId = item.Id,
+                model = null,
+                Auth_Value = authModel
+            })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $(".btnDelete").click(function() {
+                var cmd = $(this);
+                var id = cmd.attr('idata');
+
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result){
+                    if (result) {
+                        JSHelper.AJAX_Delete('/SY_Role/Delete', id)
+                        .success(function(response) {
+                           if(response.isSuccess) {
+                               cmd.parent().parent().parent().fadeOut();
+                                toastr.success('Xóa thành công', 'Thông báo')
+                           } else {
+                               toastr.error(response.Message)
+                           }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

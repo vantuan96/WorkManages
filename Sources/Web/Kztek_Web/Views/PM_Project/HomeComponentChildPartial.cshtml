@@ -1,0 +1,44 @@
+﻿@model Kztek_Library.Models.PM_ComponentChild
+
+
+@if (Model.Data_Child.Any())
+{
+    foreach (var item in Model.Data_Child)
+    {
+        var child = Model.Data_All.Where(n => n.ParentId == item.Id).ToList();
+        <tr>
+            <td>
+                <span class="label label-lg label-primary arrowed-right" style='@string.Format("margin-left:{0}px", Model.MarginLeft)'>@item.Code</span>
+            </td>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.Note</td>
+            <td>
+                <p>Start: <strong> @item.DateStart </strong></p>
+                <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+            </td>
+            <td>
+                @await Component.InvokeAsync("PM_WorkUser", new { componentid = item.Id })
+            </td>
+            <td>
+                <div class="hidden-sm hidden-xs btn-group">
+				    <button class="btn btn-xs btn-success btnCompleteComponent" idata="@item.Id" idata1="@Model.UserId" idata2="@Model.ProjectId" type="button">
+					    <i class="ace-icon fa fa-check bigger-120"></i>
+                        Hoàn thành
+				    </button>
+				</div>
+            </td>
+        </tr>
+
+        @if(child.Any())
+        {
+            @await Html.PartialAsync("HomeComponentChildPartial", new Kztek_Library.Models.PM_ComponentChild() {
+                Data_All = Model.Data_All,
+                Data_Child = child,
+                MarginLeft = Model.MarginLeft + 20,
+                UserId = Model.UserId,
+                ProjectId = Model.ProjectId
+            })
+        }
+    }
+}

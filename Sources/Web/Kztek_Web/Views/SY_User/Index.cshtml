@@ -1,0 +1,168 @@
+@model Kztek_Core.Models.GridModel<Kztek_Model.Models.SY_User>
+
+@{
+    ViewBag.Title = "Danh sách người dùng";
+    var authModel = (Kztek_Library.Models.AuthActionModel)ViewBag.AuthValue;
+}
+
+<div class="page-header">
+    <h1>
+       @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "SY_User", FormMethod.Get,  new { id = "frmUser" }))
+    {
+        @Html.Hidden("export", "0")
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-white btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm </button>
+            <a href='@Url.Action("Index", "SY_User")' class="btn btn-primary btn-white" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+            </a>
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- <a href='@Url.Action("Create", "SY_User")' class="btn btn-sm btn-success">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a> -->
+            @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_User",
+                ActionName = "Create",
+                RecordId = "",
+                model = null,
+                Auth_Value = authModel
+            })
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên tk</th>
+                    <th class="text-left">Họ tên</th>
+                    <th class="text-left">Loại</th>
+                    <th class="text-left">Trạng thái</th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.Username
+                            </td>
+
+                            <td class="text-left">
+                                @item.Name
+                            </td>
+                            <td class="center">
+                                @if (item.isAdmin == true)
+                                {
+                                    <span class="label label-sm label-danger">Admin</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-primary">User</span>
+                                }
+                            </td>
+                            <td class="center">
+                                @if (item.Active == true)
+                                {
+                                    <span class="label label-sm label-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Chưa kích hoạt</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+
+                                        @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_User",
+                ActionName = "Update",
+                RecordId = "",
+                model = new { id = item.Id },
+                Auth_Value = authModel
+            })
+
+
+                                          @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "SY_User",
+                ActionName = "Delete",
+                RecordId = item.Id,
+                model = null,
+                Auth_Value = authModel
+            })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "SY_User", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+
+            $(".btnDelete").click(function() {
+                var cmd = $(this);
+                var id = cmd.attr('idata');
+
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result){
+                    if (result) {
+                        JSHelper.AJAX_Delete('/SY_User/Delete', id)
+                        .success(function(response) {
+                           if(response.isSuccess) {
+                               cmd.parent().parent().parent().fadeOut();
+                                toastr.success('Xóa thành công', 'Thông báo')
+                           } else {
+                               toastr.error(response.Message)
+                           }
+                        });
+                    }
+                })
+            });
+
+            $(".btnExport").click(function() {
+                //JSHelper.AJAX_SendRequest('/SY_User/Export', null);
+                $("#export").val("1");
+
+                $("#frmUser").submit();
+            });
+        });
+    </script>
+}

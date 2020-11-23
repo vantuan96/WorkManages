@@ -1,0 +1,181 @@
+@model Kztek_Model.Models.SY_User_Submit
+
+@{
+    ViewBag.Title = "Cập nhật tài khoản";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="user-profile-3" class="user-profile row">
+            <div class="col-sm-offset-1 col-sm-10">
+                @using (Html.BeginForm("AccountInfo", "SY_User", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+                {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(n => n.Id)
+
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs padding-16">
+                            <li class="active">
+                                <a data-toggle="tab" href="#edit-basic">
+                                    <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                                    Thông tin
+                                </a>
+                            </li>
+
+                            <li>
+                                    <a data-toggle="tab" href="#edit-password">
+                                        <i class="blue ace-icon fa fa-key bigger-125"></i>
+                                        Mật khẩu
+                                    </a>
+                                </li>
+                        </ul>
+
+                        <div class="tab-content profile-edit-tab-content">
+                            <div id="edit-basic" class="tab-pane in active">
+                                <h4 class="header blue bolder smaller">Thông tin chính</h4>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <input type="file" name="FileAvatar"/>
+                                    </div>
+
+                                    <div class="vspace-12-sm"></div>
+
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label no-padding-right" for="Username">Username</label>
+
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(n => n.Username, new { @class = "form-control", @placeholder = "Username" })
+                                            </div>
+                                        </div>
+
+                                        <div class="space-4"></div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label no-padding-right" for="Name">Họ tên</label>
+
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(n => n.Name, new { @class = "input-large", @placeholder = "Họ tên" })
+                                            </div>
+                                        </div>
+
+                                        <div class="space-4"></div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label no-padding-right" for="Avatar">Ảnh đại diện</label>
+                                            <div class="col-sm-8">
+                                                @if (!string.IsNullOrWhiteSpace(Model.Avatar))
+                                                {
+                                                    <img src="@Model.Avatar" class="img-responsive" width="150", height="150"/>
+                                                }
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <h4 class="header blue bolder smaller">Contact</h4>
+
+                                <div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="form-field-phone">Phone</label>
+
+									<div class="col-sm-9">
+										<span class="input-icon input-icon-right">
+                                            @Html.TextBoxFor(n => n.Phone, new { @class = "input-medium input-mask-phone", @placeholder = "Số điện thoại" })
+											<i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
+										</span>
+									</div>
+								</div>
+
+                                <div class="space"></div>
+                            </div>
+
+                           <div id="edit-password" class="tab-pane">
+                                    <div class="space-10"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="OldPassword">Old Password</label>
+
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(n => n.OldPassword, new { @type = "password" })
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="Password">New Password</label>
+
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(n => n.Password, new { @type = "password" })
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label no-padding-right" for="RePassword">Confirm Password</label>
+
+                                        <div class="col-sm-9">
+                                             @Html.TextBoxFor(n => n.RePassword, new { @type = "password" })
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                Cập nhật
+                            </button>
+
+                            &nbsp; &nbsp;
+                            <a href='@Url.Action("Index", "Home")' class="btn btn-yellow">
+                                <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                Quay lại
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.span -->
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#user-profile-3')
+                .find('input[type=file]').ace_file_input({
+                    style: 'well',
+                    btn_choose: 'Ảnh đại diện',
+                    btn_change: null,
+                    no_icon: 'ace-icon fa fa-picture-o',
+                    thumbnail: 'large',
+                    droppable: true,
+
+                    allowExt: ['jpg', 'jpeg', 'png', 'gif'],
+                    allowMime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
+                })
+                
+        });
+    </script>
+}

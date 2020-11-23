@@ -1,0 +1,21 @@
+@model Kztek_Model.Models.SY_User_Selected
+
+<ul class="treeCustom">
+            @if (Model.Data_Role.Any())
+            {
+                foreach (var item in Model.Data_Role)
+                 {
+                     <li>
+                         <label style="margin-bottom: 0px;">
+                             <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" @string.Format("{0}", Model.Selected.Contains(item.Id) ? "checked" : "" )/>
+                             <span class="lbl"></span>
+                         </label>
+                         <span class="liMenuFunction" style="font-weight: 700; color: #333;">
+                                 <span> @item.RoleName</span>
+                         </span>
+                     </li>
+                 }
+            }
+
+            
+        </ul>

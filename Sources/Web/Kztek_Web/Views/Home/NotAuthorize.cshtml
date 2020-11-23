@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+            <!-- /.ace-settings-container -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+
+                    <div class="error-container">
+                        <div class="well">
+                            <h1 class="grey lighter smaller">
+                                <span class="blue bigger-125">
+                                    <i class="ace-icon fa fa-sitemap"></i>
+                                    Bạn không có quyền truy cập vào trang này
+                                </span>
+                            </h1>
+
+                            <hr />
+                            <h3 class="lighter smaller">Trang bạn muốn dùng không có trong quyền hạn sử dụng tài khoản của bạn!</h3>
+                            <hr />
+                            <div class="space"></div>
+
+                            <div class="center">
+                                <a href="javascript:history.back()" class="btn btn-grey">
+                                    <i class="ace-icon fa fa-arrow-left"></i>
+                                    Go Back
+                                </a>
+
+                                <a href='@Url.Action("Index","Home")'' class="btn btn-primary">
+                                    <i class="ace-icon fa fa-tachometer"></i>
+                                    Bàn làm việc
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->

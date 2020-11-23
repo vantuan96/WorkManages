@@ -1,0 +1,147 @@
+@model Kztek_Model.Models.MN.MN_KeySecurity
+
+@{
+ViewBag.Title = "Thêm mới key bảo mật";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Create", "MN_KeySecurity", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmLicense" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.Hidden("SaveAndCountinue", false)
+
+    <div class="col-xs-7">
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right">
+                Dự án <span style="color:red">*</span></label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Name, new { @class = "form-control",
+                @placeholder = "Name" }) @Html.ValidationMessageFor(n =>
+                n.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Code </label>
+            <div class="col-sm-6 col-xs-12">
+                <div class="input-group">
+					@Html.TextBoxFor(n => n.Code, new { @class = "form-control", @placeholder = "Code" })
+				    <span class="input-group-btn">
+					    <button class="btnGetCode btn btn-sm btn-default" type="button">
+						    <i class="ace-icon fa fa-key bigger-110"></i>
+						    Get code
+					    </button>
+				    </span>
+				</div>
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyA, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Mô tả </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                @placeholder = "Description" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Ghi chú </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextAreaFor(n => n.Note, new { @class = "form-control",
+                @placeholder = "Note" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Key A </label>
+            <div class="col-sm-6 col-xs-12">
+                <div class="input-group">
+					@Html.TextBoxFor(n => n.KeyA, new { @class = "form-control", @placeholder = "KeyA" })
+				    <span class="input-group-btn">
+					    <button class="btnGetKey btn btn-sm btn-default" type="button">
+						    <i class="ace-icon fa fa-key bigger-110"></i>
+						    Get key
+					    </button>
+				    </span>
+				</div>
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyA, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Key B </label>
+            <div class="col-sm-6 col-xs-12">
+                <div class="input-group">
+					@Html.TextBoxFor(n => n.KeyB, new { @class = "form-control", @placeholder = "KeyB" })
+				    <span class="input-group-btn">
+					    <button class="btnGetKey btn btn-sm btn-default" type="button">
+						    <i class="ace-icon fa fa-key bigger-110"></i>
+						    Get key
+					    </button>
+				    </span>
+				</div>
+            </div>
+            @Html.ValidationMessageFor(n =>
+                n.KeyB, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "MN_KeySecurity",
+          ActionName = "Create",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#Countinue").click(function () {
+            $("#SaveAndCountinue").val("true");
+        });
+
+        $('.btnGetCode').click(function () {
+            var input = $(this).parent().parent().find('input');
+
+            JSHelper.AJAX_SendRequest('/MN_KeySecurity/GetCode', {})
+                .success(function (response) {
+                    input.val(response);
+                });
+        });
+
+        $('.btnGetKey').click(function () {
+            var input = $(this).parent().parent().find('input');
+
+            JSHelper.AJAX_SendRequest('/MN_KeySecurity/GetKey', {})
+                .success(function (response) {
+                    input.val(response);
+                });
+        });
+    });
+</script>
+}

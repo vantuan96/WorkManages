@@ -1,0 +1,40 @@
+@model List<Kztek_Model.Models.WM.WM_Task>
+
+<h3 class="header smaller lighter blue">
+         @await Component.InvokeAsync("Language", new { path = "BODY:SUBHEADER:TASK" })
+        </h3>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td colspan="2">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td style="width: 20%;">Tiêu đề</td>
+                        <td style="width: 80%;">@item.Title</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mô tả</td>
+                        <td style="width: 80%;">@item.Description</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Thời gian</td>
+                        <td style="width: 80%;"> 
+                            <p>Start: @item.DateStart</p> 
+                            <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <button class="btn btn-sm btn-success btnCompleteTask" type="button" idata="@item.Id">
+                                <i class="fa fa-check"></i>
+                                Hoàn thành công việc
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+}

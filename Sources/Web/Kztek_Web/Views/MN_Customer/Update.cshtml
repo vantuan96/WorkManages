@@ -1,0 +1,93 @@
+@model Kztek_Model.Models.MN.MN_Customer
+
+@{
+ViewBag.Title = "Cập nhật khách hàng";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Update", "MN_Customer", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmUser" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(n => n.Id)
+        @Html.Hidden("hidCustomerId", Model.Id)
+
+    <div class="col-xs-5">
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right">
+                Tiêu đề <span style="color:red">*</span></label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.Name, new { @class = "form-control",
+                @placeholder = "Name" }) @Html.ValidationMessageFor(n =>
+                n.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Mô tả </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                @placeholder = "Mô tả" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Nhóm khách hàng </label>
+            <div class="col-sm-6 col-xs-12">
+               @await Component.InvokeAsync("ChosenSelect", ViewBag.Select_CustomerGroup)
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="col-xs-5">
+        <div>
+            <button class="btn btn-sm btn-primary btnNewContact" type="button">
+                <i class="fa fa-plus"></i>
+                Thêm mới
+            </button>
+        </div>
+
+        <hr />
+
+        <table class="table table-bordered" id="tblContact">
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "MN_Customer",
+          ActionName = "Update",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+    <script src="~/modules/MN/MN_CustomerController.js"></script>
+<script>
+    $(document).ready(function () {
+        MN_CustomerController.init();
+    });
+</script>
+}

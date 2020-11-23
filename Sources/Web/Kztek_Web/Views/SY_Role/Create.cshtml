@@ -1,0 +1,113 @@
+@model Kztek_Model.Models.SY_Role_Submit
+
+@{
+ViewBag.Title = "Thêm mới vai trò";
+    var menus = (List<string>)ViewBag.MenuFunctions;
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null) {
+    <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("Create", "SY_Role", FormMethod.Post, new { encType = "multipart/form-data", @class =
+    "form-horizontal", @role = "form", @id="frmRole" }))
+    {
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(n => n.MenuFunctionIds)
+    @Html.Hidden("SaveAndCountinue", false)
+
+    <div class="col-xs-7">
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right">
+                Tên vai trò <span style="color:red">*</span></label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextBoxFor(n => n.RoleName, new { @class = "form-control",
+                @placeholder = "Tên vai trò" }) @Html.ValidationMessageFor(n =>
+                n.RoleName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Mô tả </label>
+            <div class="col-sm-6 col-xs-12">
+                @Html.TextAreaFor(n => n.Description, new { @class = "form-control",
+                @placeholder = "Mô tả" }) @Html.ValidationMessageFor(n =>
+                n.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right"> Kích hoạt </label>
+            <div class="col-sm-8">
+                <label class="line-height-250">
+                    @Html.CheckBoxFor(n => n.Active, new { @class = "ace" })
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-5">
+        @await Html.PartialAsync("MenuFunctionParent", new Kztek_Model.Models.SY_Role_Selected() {
+            Data_Tree = Model.Data_Tree,
+            Selected = Model.MenuFunctions
+        })
+    </div>
+
+     @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "SY_Role",
+          ActionName = "Create",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+    }
+</div>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#Countinue").click(function () {
+            $("#SaveAndCountinue").val("true");
+        });
+
+            $(".chkCheckBox").click(function() {
+                var cmd = $(this);
+                cmd.parent().parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            $("span.liMenuFunction").click(function() {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.liMenuFunction').parent().parent().fadeToggle();
+            });
+
+           $("#frmRole").submit(function () {
+                var lstId = "";
+
+                $("input[name='chkCheckBox']").each(function() {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+
+                    if ($(this).is(":checked")) {
+                        lstId = lstId + id + ";";
+                    }
+                });
+
+                $("#MenuFunctionIds").val(lstId);
+            }); 
+    });
+</script>
+}

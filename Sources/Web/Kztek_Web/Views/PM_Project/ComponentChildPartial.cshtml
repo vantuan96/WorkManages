@@ -1,0 +1,75 @@
+﻿@model Kztek_Library.Models.PM_ComponentChild
+
+
+@if (Model.Data_Child.Any())
+{
+    foreach (var item in Model.Data_Child)
+    {
+        var child = Model.Data_All.Where(n => n.ParentId == item.Id).ToList();
+        <tr>
+            <td>
+                <span class="label label-lg label-primary arrowed-right" style='@string.Format("margin-left:{0}px", Model.MarginLeft)'>@item.Code</span>
+            </td>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.Note</td>
+            <td>
+                <p>Start: <strong> @item.DateStart </strong></p>
+
+                @if (item.Status == 0)
+                {
+                    <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+                } else
+                {
+                    <p>End: @item.DateEnd</p>
+                }
+
+                <p>
+                    @switch (item.Status)
+                    {
+                        case 0:
+                            <span class="label label-sm label-primary">Đang tiến hành</span>
+                            break;
+                            case 1:
+                            <span class="label label-sm label-success">Hoàn thành</span>
+                            break;
+                            case 2:
+                            <span class="label label-sm label-warning">Tạm dừng</span>
+                            break;
+                        default:
+                            break;
+                    }
+                </p>
+            </td>
+            <td>
+                @await Component.InvokeAsync("PM_WorkUser", new { componentid = item.Id })
+            </td>
+            <td>
+                <div class="hidden-sm hidden-xs btn-group">
+                   <button class="btn btn-xs btn-purple btnTagUser" idata="@item.Id" type="button">
+						<i class="ace-icon fa fa-tag bigger-120"></i>
+					</button>
+
+				    <button class="btn btn-xs btn-info btnEditComponent" idata="@item.Id" type="button">
+					    <i class="ace-icon fa fa-pencil bigger-120"></i>
+				    </button>
+
+				    <button class="btn btn-xs btn-danger btnDeleteComponent" idata="@item.Id" type="button">
+					    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+				    </button>
+
+                   
+				</div>
+            </td>
+        </tr>
+
+        @if(child.Any())
+        {
+            @await Html.PartialAsync("ComponentChildPartial", new Kztek_Library.Models.PM_ComponentChild() {
+                Data_All = Model.Data_All,
+                Data_Child = child,
+                MarginLeft = Model.MarginLeft + 20
+            })
+        }
+    }
+}

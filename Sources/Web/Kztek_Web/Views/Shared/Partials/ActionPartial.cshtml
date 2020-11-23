@@ -1,0 +1,48 @@
+@model Kztek_Library.Models.AuthPartialModel
+
+<!-- Create -->
+@if(Model.Auth_Value.Create_Auth == 1 && Model.ActionName == "Create" && Model.IsUsingAjax == false) 
+{
+    <a href='@Url.Action("Create", Model.ControllerName, Model.model)' class="btn btn-white btn-success">
+        <i class=" fa fa-plus"></i> Thêm mới
+    </a>
+}
+
+@if(Model.Auth_Value.Update_Auth == 1 && Model.ActionName == "Update") 
+{
+    <a href='@Url.Action("Update", Model.ControllerName, Model.model)' class="green" title="Cập nhật">
+        <i class="ace-icon fa fa-pencil bigger-120"></i>
+    </a>
+}
+
+@if(Model.Auth_Value.Delete_Auth == 1 && Model.ActionName == "Delete") 
+{
+    <a href="javascript:void(0)" class="btnDelete red" idata="@Model.RecordId" title="Xóa">
+        <i class="ace-icon fa fa-trash bigger-120"></i>
+    </a>
+}
+
+@if(Model.ActionName == "Export") 
+{
+    <a href="javascript:void(0)" class="btnExport btn btn-white btn-primary" title="Xuất excel">
+                <i class="ace-icon fa fa-file-excel-o"></i> Xuất excel
+            </a>
+}
+
+@if(Model.ActionName == "ExportFile") 
+{
+    <a href="javascript:void(0)" class="btnExportFile pink" title="Xuất text" idata="@Model.RecordId">
+                <i class="ace-icon fa fa-file-text"></i>
+            </a>
+}
+ 
+<!-- Create -->
+@if(Model.Auth_Value.Create_Auth == 1 && Model.ActionName == "Create" && Model.IsUsingAjax == true) 
+{
+    <a href="javascript:void(0)" class='@string.Format("{0} btn btn-white btn-success", Model.RecordId)' title="Thêm mới">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+}
+
+                                        
+

@@ -1,0 +1,20 @@
+﻿@model Kztek_Library.Models.PM_ProjectHomeModel
+
+<h3 class="header smaller lighter red">
+         @await Component.InvokeAsync("Language", new { path = "BODY:SUBHEADER:PROJECT" })
+        </h3>
+
+<table id="tblProject" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Mô tả</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @await Html.PartialAsync("HomeProjectPartial", Model.Data_Project)
+    </tbody>
+</table>

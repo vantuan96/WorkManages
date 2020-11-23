@@ -1,0 +1,110 @@
+@model Kztek_Model.Models.SY_MenuFunction_Submit
+
+@{
+    ViewBag.Title = "Cập nhật menu";
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "SY_MenuFunction", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(n => n.Id)
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Tên menu <span style="color:red">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.MenuName, new { @class = "form-control", @placeholder = "Tên menu" })
+                    @Html.ValidationMessageFor(n => n.MenuName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Tên controller </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.ControllerName, new { @class = "form-control", @placeholder = "Tên controller", @Value = (string)ViewBag.Controller })
+                    @Html.ValidationMessageFor(n => n.ControllerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Tên action </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.ActionName, new { @class = "form-control", @placeholder = "Tên action" })
+                    @Html.ValidationMessageFor(n => n.ActionName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Cấp cha </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.ParentId, new SelectList(ViewBag.Data_MenuFunction, "Id", "MenuName", (string)ViewBag.Parent), new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Loại menu </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.MenuType, new SelectList(ViewBag.Data_MenuType, "ItemValue", "ItemText", (string)ViewBag.Type), new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Icon </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Icon, new { @class = "form-control", @placeholder = "Icon" })
+                    @Html.ValidationMessageFor(n => n.Icon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Số thứ tự </label>
+                <div class="col-sm-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "Số thứ tự" })
+                    @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Kích hoạt </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Active, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+              @await Html.PartialAsync("~/Views/Shared/Partials/ButtonPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+          ControllerName = "SY_MenuFunction",
+          ActionName = "Update",
+          RecordId = "",
+          model = null,
+          Auth_Value = null
+      })
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

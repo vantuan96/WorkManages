@@ -1,0 +1,30 @@
+﻿@model Kztek_Model.Models.MN.MN_Contact
+
+@{
+        var dta = Kztek_Library.Helpers.StaticList.ContactType();
+        var mol = new Kztek_Library.Models.SelectListModel_Chosen()
+        {
+            Data = dta,
+            IdSelectList = "ContactType",
+            isMultiSelect = false,
+            Placeholder = "Chọn loại",
+            Selecteds = Model.ContactType.ToString()
+    };
+}
+
+<tr>
+    <td class="center">
+        @await Component.InvokeAsync("ChosenSelect", mol)
+    </td>
+    <td class="center">
+        <input type="text" value="@Model.Value" class="form-control" name="txtContactValue"/>
+    </td>
+    <td class="center">
+        <button class="btn btn-sm btn-primary btnEditContact" idata="@Model.Id" idata1="@Model.CustomerId" type="button">
+            <i class="fa fa-save"></i>
+        </button>
+        <button class="btn btn-sm btn-danger btnDeleteContact" idata="@Model.Id" type="button">
+            <i class="fa fa-trash"></i>
+        </button>
+    </td>
+</tr>

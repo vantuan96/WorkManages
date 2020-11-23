@@ -1,0 +1,16 @@
+@model Kztek_Library.Models.SelectListModel_Chosen
+
+<select @string.Format("{0}", Model.isMultiSelect ? "multiple=''" : "")  class='form-control @string.Format("{0}", Model.isMultiSelect ? "tag-input-style" : "")'' id="@Model.IdSelectList" name="@Model.IdSelectList" data-placeholder="@Model.Placeholder">
+    @foreach (var item in Model.Data)
+    {
+        if (Model.Selecteds.Contains(item.ItemValue))
+        {
+            <option value="@item.ItemValue" selected>@item.ItemText</option>
+            
+        } 
+        else
+        {
+            <option value="@item.ItemValue">@item.ItemText</option>
+        }
+    }
+</select>

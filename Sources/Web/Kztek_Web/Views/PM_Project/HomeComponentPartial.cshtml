@@ -1,0 +1,91 @@
+﻿@model List<Kztek_Model.Models.PM.PM_Component>
+
+@{
+    //var data = Model.Where(n => n.ParentId == "0").ToList();
+    var objProject = (Kztek_Model.Models.PM.PM_Project)ViewBag.objProjectValue;
+}
+
+<a href="javascript:void(0)" class="btnBackToProjects">
+    <span>Back to list</span>
+</a>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <strong>Dự án</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tiêu đề</td>
+                    <td>@objProject.Title</td>
+                    <td>Ngày bắt đầu</td>
+                    <td>@objProject.DateStart.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+                <tr>
+                    <td>Mô tả</td>
+                    <td>@objProject.Description</td>
+                    <td>Ngày kết thúc</td>
+                    <td>@Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(objProject.DateEnd))</td>
+                </tr>
+                 <tr>
+                    <td>Ghi chú</td>
+                    <td>@objProject.Note</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr />
+
+<table class="table table-bordered table-hover">
+    <thead>
+               <tr>
+                   <th>Mã</th>
+                   <th>Tiêu đề</th>
+                   <th>Mô tả</th>
+                   <th>Ghi chú</th>
+                   <th>Thời gian</th>
+                   <th>Người thực hiện</th>
+                   <th>Xử lý</th>
+               </tr>
+           </thead>
+           <tbody>
+               @if(Model.Any())
+                {
+                    foreach (var item in Model.OrderBy(n => n.Code))
+                    {
+                        //var child = Model.Where(n => n.ParentId == item.Id).ToList();
+                        <tr>
+                            <td><span class="label label-lg label-primary arrowed-right">@item.Code</span></td>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.Note</td>
+                            <td>
+                                <p>Start: <strong> @item.DateStart.ToString("dd/MM/yyyy") </strong></p>
+                                <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+                            </td>
+                            <td>
+                                @await Component.InvokeAsync("PM_WorkUser", new { componentid = item.Id })
+                            </td>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+				                    <button class="btn btn-xs btn-success btnCompleteComponent" idata="@item.Id" idata1="@ViewBag.UserIdValue" idata2="@ViewBag.projectidValue" type="button">
+					                    <i class="ace-icon fa fa-check bigger-120"></i>
+                                        Hoàn thành
+				                    </button>
+			                    </div>
+                            </td>
+                        </tr>
+                    }
+                }
+           </tbody>
+</table>
+
+
+

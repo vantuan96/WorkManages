@@ -1,0 +1,151 @@
+@model Kztek_Core.Models.GridModel<Kztek_Model.Models.WM.WM_Schedule>
+
+@{
+    ViewBag.Title = "Danh sách kế hoạch trong tuần";
+    var authModel = (Kztek_Library.Models.AuthActionModel)ViewBag.AuthValue;
+}
+
+<div class="page-header">
+    <h1>
+       @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "WM_Schedule", FormMethod.Get,  new { id = "frmSchedule" }))
+    {
+        @Html.Hidden("export", "0")
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-white btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm </button>
+            <a href='@Url.Action("Index", "WM_Schedule")' class="btn btn-primary btn-white" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+            </a>
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- <a href='@Url.Action("Create", "WM_Schedule")' class="btn btn-sm btn-success">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a> -->
+            @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "WM_Schedule",
+                ActionName = "Create",
+                RecordId = "",
+                model = null,
+                Auth_Value = authModel
+            })
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tiêu đề</th>
+                    <th class="text-left">Mô tả</th>
+                    <th class="text-left">Thời gian</th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.Title
+                            </td>
+
+                            <td class="text-left">
+                                @item.Description
+                            </td>
+                            <td class="center">
+                                <p>Start: <strong> @item.DateStart </strong></p>
+                                <p>End: @Html.Raw(Kztek_Library.Helpers.FunctionHelper.GetStatusDateByDay(item.DateEnd))</p>
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+
+                                        @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "WM_Schedule",
+                ActionName = "Update",
+                RecordId = "",
+                model = new { id = item.Id },
+                Auth_Value = authModel
+            })
+
+
+                                          @await Html.PartialAsync("~/Views/Shared/Partials/ActionPartial.cshtml", new Kztek_Library.Models.AuthPartialModel() {
+                ControllerName = "WM_Schedule",
+                ActionName = "Delete",
+                RecordId = item.Id,
+                model = null,
+                Auth_Value = authModel
+            })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "WM_Schedule", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+
+            $(".btnDelete").click(function() {
+                var cmd = $(this);
+                var id = cmd.attr('idata');
+
+                bootbox.confirm("Bạn chắc chắn muốn xóa?", function(result){
+                    if (result) {
+                        JSHelper.AJAX_Delete('/WM_Schedule/Delete', id)
+                        .success(function(response) {
+                           if(response.isSuccess) {
+                               cmd.parent().parent().parent().fadeOut();
+                                toastr.success('Xóa thành công', 'Thông báo')
+                           } else {
+                               toastr.error(response.Message)
+                           }
+                        });
+                    }
+                })
+            });
+
+            $(".btnExport").click(function() {
+                //JSHelper.AJAX_SendRequest('/WM_Schedule/Export', null);
+                $("#export").val("1");
+
+                $("#frmSchedule").submit();
+            });
+        });
+    </script>
+}

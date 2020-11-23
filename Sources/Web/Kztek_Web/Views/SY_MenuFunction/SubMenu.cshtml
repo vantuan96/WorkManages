@@ -1,0 +1,46 @@
+@model Kztek_Model.Models.SY_MenuFunction_Tree
+
+@{
+}
+
+@if (Model.Data_Child.Any())
+{
+    <ul class="submenufunction">
+        @foreach (var item in Model.Data_Child.OrderBy(n => n.SortOrder))
+        {
+            var childItem = Model.Data_All.Where(c => c.ParentId == item.Id).ToList();
+            <li>
+                <label style="margin-bottom: 0px;">
+                    <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" />
+                    <span class="lbl"></span>
+                </label>
+                <span class="liMenuFunction" style="color: #666;">
+                    @if (item.Active)
+                    {
+                        <span>@item.SortOrder</span> <span>. @item.MenuName</span>
+                    }
+                    else
+                    {
+                        <span style="text-decoration:line-through">
+                            <span>@item.SortOrder</span> <span>. @item.MenuName</span>
+                        </span>
+                    }
+                </span>
+                 <span>
+                             <a href='@Url.Action("Update", "SY_MenuFunction", new { id = item.Id })'>
+                                 <i class="ace-icon fa fa-pencil-square-o"></i>
+                             </a>
+                         </span>
+                
+                @if (childItem.Any())
+                {
+                    @await Html.PartialAsync("SubMenu", new Kztek_Model.Models.SY_MenuFunction_Tree() {
+                        Data_Child = childItem,
+                        Data_All = Model.Data_All
+                    })
+                }
+                
+            </li>
+        }
+    </ul>
+}
